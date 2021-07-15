@@ -6,28 +6,25 @@ using Cw.PayslipService.Services;
 using Cw.PayslipService.Validator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace Cw.PayslipService.Controllers
 
 {
-    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PayslipController : ControllerBase
     {
-        private IPayslipService _payslipService;
+        private IAuthenticate _authenticateService;
         private IPayslipRepository _payslipRepository;
 
-        public PayslipController(IPayslipService payslipService, IPayslipRepository payslipRepository)
+        public PayslipController(IAuthenticate authenticateService, IPayslipRepository payslipRepository)
         {
-            _payslipService = payslipService;
+            _authenticateService = authenticateService;
             _payslipRepository = payslipRepository;
 
         }
 
         [AllowAnonymous]
-        //[HttpPost("authenticate")]
         [Authorize(Roles = Role.Admin)]
         [HttpPost]
         public ActionResult UploadEmployee([FromBody] Employee createEmployeeCommand)
@@ -38,7 +35,7 @@ namespace Cw.PayslipService.Controllers
                 return BadRequest(validationResults.Errors);
             }
 
-            var user = _payslipService.Authenticate(createEmployeeCommand.Username, createEmployeeCommand.Password);
+            var user = _authenticateService.Authenticate(createEmployeeCommand.Username, createEmployeeCommand.Password);
             if (user == null) return BadRequest();
             var employeeDto = new EmployeeDto
             {

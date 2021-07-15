@@ -5,22 +5,18 @@ using Cw.Payslip.Shared;
 using Cw.Payslip.Shared.DTO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using NSubstitute;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Cw.PayslipService.Tests
 {
     [TestClass]
-    public class PayslipServiceTests
+    public class PayslipRepositoryTests
     {
         private readonly IPayslipContext _payslipContext;
         private PayslipRepository _payslipRepository;
-        //private DbSet<PayslipTable> PayslipDbset { get; set; }
-        //public List<PayslipTable> getProducts() => PayslipDbset.Local.ToList<PayslipTable>();
 
-        public PayslipServiceTests()
+        public PayslipRepositoryTests()
         {
             _payslipContext = Substitute.For<IPayslipContext>();
             _payslipRepository = new PayslipRepository(_payslipContext);

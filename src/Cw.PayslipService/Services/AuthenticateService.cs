@@ -11,12 +11,12 @@ using Cw.PayslipService.Helpers;
 
 namespace Cw.PayslipService.Services
 {
-    public interface IPayslipService
+    public interface IAuthenticate
     {
         User Authenticate(string username, string password);
     }
 
-    public class PayslipService : IPayslipService
+    public class AuthenticateService : IAuthenticate
     {
         private readonly List<User> _users = new()
         {
@@ -25,7 +25,7 @@ namespace Cw.PayslipService.Services
 
         private readonly AppSettings _appSettings;
 
-        public PayslipService(IOptions<AppSettings> appSettings)
+        public AuthenticateService(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }

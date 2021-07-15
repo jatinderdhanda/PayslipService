@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cw.Payslip.Repos\Cw.Payslip.Repos.csproj" />
+    <ProjectReference Include="..\Cw.PayslipService\Cw.PayslipService.csproj" />
   </ItemGroup>
 
 </Project>
