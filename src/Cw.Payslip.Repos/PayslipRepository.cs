@@ -21,11 +21,6 @@ namespace Cw.Payslip.Repos
 
         public PayslipValidatorOperationResult<PayslipDto> GetPayslipFor(string payslipId)
         {
-            //var payslipArray = _payslipContext.PayslipDbset.Local.Where(x => x.PayslipId == payslipId).FirstOrDefault();
-            //if (payslipArray != null)
-            //{
-            //    return PayslipValidatorOperationResult.CreateSuccess(PayslipTable.CreateDto(payslipArray));
-            //}
             var payslipArray = LoadedExistingPayslips();
             foreach (var payslip in payslipArray)
             {

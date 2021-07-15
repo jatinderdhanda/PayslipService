@@ -55,7 +55,7 @@ namespace Cw.PayslipService
             });
 
             // configure DI for application services
-            services.AddScoped<IAuthenticate, Services.AuthenticateService>();
+            services.AddScoped<IAuthenticate, AuthenticateService>();
             services.AddScoped<IPayslipRepository, PayslipRepository>();
         }
 
