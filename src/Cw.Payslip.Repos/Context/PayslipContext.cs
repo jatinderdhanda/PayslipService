@@ -24,10 +24,10 @@ namespace Cw.Payslip.Repos.Context
         public List<PayslipTable> GetAllPayslips() => PayslipDbset.Local.ToList();
 
         private void LoadDefaultData() {
-            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-16), PaymentEndDate = System.DateTime.Now, BaseSalary = "120000", PayslipId = "567098", Status = Shared.DTO.DataStatus.Valid });
-            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-30), PaymentEndDate = System.DateTime.Now.AddDays(-15), BaseSalary = "120000", PayslipId = "567090", Status = Shared.DTO.DataStatus.Valid });
-            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-45), PaymentEndDate = System.DateTime.Now.AddDays(-29), BaseSalary = "151000", PayslipId = "567998", Status = Shared.DTO.DataStatus.Valid });
-            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-60), PaymentEndDate = System.DateTime.Now.AddDays(-44), BaseSalary = "100000", PayslipId = "567089", Status = Shared.DTO.DataStatus.Valid });
+            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-16), PaymentEndDate = System.DateTime.Now, BaseSalary = "120000", PayslipId = "567098", EmployeeId = "0098765", Status = Shared.DTO.DataStatus.Valid });
+            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-30), PaymentEndDate = System.DateTime.Now.AddDays(-15), BaseSalary = "120000", PayslipId = "567090", EmployeeId = "0098766", Status = Shared.DTO.DataStatus.Valid });
+            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-45), PaymentEndDate = System.DateTime.Now.AddDays(-29), BaseSalary = "151000", PayslipId = "567998", EmployeeId = "0098767", Status = Shared.DTO.DataStatus.Valid });
+            PayslipDbset.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-60), PaymentEndDate = System.DateTime.Now.AddDays(-44), BaseSalary = "100000", PayslipId = "567089", EmployeeId = "0098768", Status = Shared.DTO.DataStatus.Valid });
         }
     }
 }

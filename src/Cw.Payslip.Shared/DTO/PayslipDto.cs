@@ -8,6 +8,7 @@ namespace Cw.Payslip.Shared.DTO
         public DateTime PaymentEndDate { get; set; }
         public string BaseSalary { get; set; }
         public string PayslipId { get; set; }
+        public string EmployeeId { get; set; }
         public DataStatus Status { get; set; }
         public DateTime Processed { get; set; }
     }

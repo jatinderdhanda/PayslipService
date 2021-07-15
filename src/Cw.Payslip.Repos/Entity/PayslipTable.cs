@@ -17,6 +17,8 @@ namespace Cw.Payslip.Repos.Entity
         [Key]
         [Column("PayslipId", TypeName = "NVARCHAR(255)")]
         public string PayslipId { get; set; }
+        [Column("EmployeeId", TypeName = "NVARCHAR(255)")]
+        public string EmployeeId { get; set; }
         [Column("Status", TypeName = "NVARCHAR(10)")]
         public DataStatus Status { get; set; }
         [Column("Processed", TypeName = "BIT")]
@@ -29,6 +31,7 @@ namespace Cw.Payslip.Repos.Entity
                 PaymentStartDate = result.PaymentStartDate,
                 PaymentEndDate = result.PaymentEndDate,
                 PayslipId = result.PayslipId,
+                EmployeeId = result.EmployeeId,
                 BaseSalary = result.BaseSalary,
                 Status = result.Status,
                 Processed = result.Processed

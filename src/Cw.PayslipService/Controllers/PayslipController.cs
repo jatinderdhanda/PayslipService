@@ -60,6 +60,7 @@ namespace Cw.PayslipService.Controllers
                 {
                     BaseSalary = payslipModel.Result.BaseSalary,
                     PayslipId = payslipModel.Result.PayslipId,
+                    EmployeeId = payslipModel.Result.EmployeeId,
                     PaymentStartDate = payslipModel.Result.PaymentStartDate.ToShortDateString(),
                     PaymentEndDate = payslipModel.Result.PaymentEndDate.Date.ToShortDateString()
                 });

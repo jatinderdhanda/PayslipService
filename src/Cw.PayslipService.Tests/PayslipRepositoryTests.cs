@@ -26,18 +26,12 @@ namespace Cw.PayslipService.Tests
         {
             var PaySlipEntity = new List<PayslipTable>
             {
-                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-16), PaymentEndDate = System.DateTime.Now, BaseSalary = "120000", PayslipId = "567098", Status = Payslip.Shared.DTO.DataStatus.Valid },
-                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-30), PaymentEndDate = System.DateTime.Now.AddDays(-15), BaseSalary = "120000", PayslipId = "567090", Status = Payslip.Shared.DTO.DataStatus.Valid },
-                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-45), PaymentEndDate = System.DateTime.Now.AddDays(-29), BaseSalary = "151000", PayslipId = "567998", Status = Payslip.Shared.DTO.DataStatus.Valid },
-                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-60), PaymentEndDate = System.DateTime.Now.AddDays(-44), BaseSalary = "100000", PayslipId = "567089", Status = Payslip.Shared.DTO.DataStatus.Valid }
+                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-16), PaymentEndDate = System.DateTime.Now, BaseSalary = "120000", PayslipId = "567098",  EmployeeId = "0098765", Status = DataStatus.Valid },
+                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-30), PaymentEndDate = System.DateTime.Now.AddDays(-15), BaseSalary = "120000", PayslipId = "567090",  EmployeeId = "0098766", Status = DataStatus.Valid },
+                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-45), PaymentEndDate = System.DateTime.Now.AddDays(-29), BaseSalary = "151000", PayslipId = "567998", EmployeeId = "0098767", Status = DataStatus.Valid },
+                new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-60), PaymentEndDate = System.DateTime.Now.AddDays(-44), BaseSalary = "100000", PayslipId = "567089", EmployeeId = "0098768", Status = DataStatus.Valid }
             };
             _payslipContext.GetAllPayslips().Returns(PaySlipEntity);
-            //var mockDbForPayslip = Substitute.For<DbSet<PayslipTable>, IQueryable<PayslipTable>>();
-            //var mockLocalDbPayslip = Substitute.For<Microsoft.EntityFrameworkCore.ChangeTracking.LocalView<PayslipTable>>();
-            //mockLocalDbPayslip.Add(new PayslipTable { PaymentStartDate = System.DateTime.Now.AddDays(-16), PaymentEndDate = System.DateTime.Now, BaseSalary = "120000", PayslipId = "567098", Status = DataStatus.Valid });
-            //_payslipContext.PayslipDbset.Returns(mockDbForPayslip);
-            //_payslipContext.PayslipDbset.Local.Returns(mockLocalDbPayslip);
-
             var mockDbForEmployee = Substitute.For<DbSet<EmployeeTable>>();
             _payslipContext.EmployeeDbset.Returns(mockDbForEmployee);
         }
