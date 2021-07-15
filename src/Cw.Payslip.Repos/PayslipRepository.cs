@@ -2,7 +2,6 @@
 using Cw.Payslip.Shared.DTO;
 using Cw.Payslip.Repos.Entity;
 using Cw.Payslip.Shared;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Cw.Payslip.Repos
@@ -14,19 +13,15 @@ namespace Cw.Payslip.Repos
         {
             _payslipContext = payslipContext;
         }
-        private List<PayslipDto> LoadedExistingPayslips()
+        private PayslipDto FindMatchingPayslip(string payslipId)
         {
-            return _payslipContext.GetAllPayslips().Select(x => PayslipTable.CreateDto(x)).ToList();
+            return _payslipContext.GetAllPayslips().Where(x=> x.PayslipId == payslipId).Select(x => PayslipTable.CreateDto(x)).FirstOrDefault();
         }
 
         public PayslipValidatorOperationResult<PayslipDto> GetPayslipFor(string payslipId)
         {
-            var payslipArray = LoadedExistingPayslips();
-            foreach (var payslip in payslipArray)
-            {
-                if (payslip.PayslipId == payslipId && payslip.Status == DataStatus.Valid)
-                    return PayslipValidatorOperationResult.CreateSuccess(payslip);
-            }
+            var matchingPayslip = FindMatchingPayslip(payslipId);
+            if (matchingPayslip != null)return PayslipValidatorOperationResult.CreateSuccess(matchingPayslip);
             return PayslipValidatorOperationResult.CreateError(new PayslipDto());
 
         }
