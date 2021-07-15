@@ -27,32 +27,32 @@ namespace Cw.PayslipService.Controllers
         [AllowAnonymous]
         [Authorize(Roles = Role.Admin)]
         [HttpPost]
-        public ActionResult UploadEmployee([FromBody] Employee createEmployeeCommand)
+        public ActionResult UploadEmployee([FromBody] Employee employeeDetails)
         {
-            var validationResults = new EmployeeValidator().Validate(createEmployeeCommand);
+            var validationResults = new EmployeeValidator().Validate(employeeDetails);
             if (!validationResults.IsValid)
             {
                 return BadRequest(validationResults.Errors);
             }
 
-            var user = _authenticateService.Authenticate(createEmployeeCommand.Username, createEmployeeCommand.Password);
+            var user = _authenticateService.Authenticate(employeeDetails.Username, employeeDetails.Password);
             if (user == null) return BadRequest();
             var employeeDto = new EmployeeDto
             {
-                Email = createEmployeeCommand.Email,
-                EmployeeId = createEmployeeCommand.EmployeeId,
-                FirstName = createEmployeeCommand.FirstName,
-                LastName = createEmployeeCommand.LastName
+                Email = employeeDetails.Email,
+                EmployeeId = employeeDetails.EmployeeId,
+                FirstName = employeeDetails.FirstName,
+                LastName = employeeDetails.LastName
             };
             var response =_payslipRepository.UploadEmployeeDetail(employeeDto);
             return Ok(response);
         }
 
         [HttpGet]
-        public ActionResult PayslipLookup(string employeeId)
+        public ActionResult PayslipLookup(string payslipId)
         {
-            if (string.IsNullOrWhiteSpace(employeeId)) return null;
-            var payslipModel = _payslipRepository.GetPayslipFor(employeeId);
+            if (string.IsNullOrWhiteSpace(payslipId)) return BadRequest("Payslip Id cannot be empty");
+            var payslipModel = _payslipRepository.GetPayslipFor(payslipId);
 
             if (payslipModel.IsSuccess)
             {
