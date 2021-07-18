@@ -1,6 +1,5 @@
 using Cw.Payslip.Repos;
 using Cw.Payslip.Shared.DTO;
-using Cw.PayslipService.Entities;
 using Cw.PayslipService.Models;
 using Cw.PayslipService.Services;
 using Cw.PayslipService.Validator;
@@ -12,7 +11,7 @@ namespace Cw.PayslipService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PayslipController : ControllerBase
+    public class PayslipController : BaseController
     {
         private IAuthenticate _authenticateService;
         private IPayslipRepository _payslipRepository;
@@ -24,8 +23,7 @@ namespace Cw.PayslipService.Controllers
 
         }
 
-        [AllowAnonymous]
-        [Authorize(Roles = Role.Admin)]
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public ActionResult UploadEmployee([FromBody] Employee employeeDetails)
         {
@@ -36,7 +34,7 @@ namespace Cw.PayslipService.Controllers
             }
 
             var user = _authenticateService.Authenticate(employeeDetails.Username, employeeDetails.Password);
-            if (user == null) return BadRequest();
+            if (user == null) return Unauthorized();
             var employeeDto = new EmployeeDto
             {
                 Email = employeeDetails.Email,
